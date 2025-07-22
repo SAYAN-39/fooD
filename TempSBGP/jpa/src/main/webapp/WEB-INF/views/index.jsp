@@ -1,5 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.example.jpa.model.Product" %>
+<%
+	String data = (String) session.getAttribute("udata");
+	if (data == null) {
+		response.sendRedirect("/reg");  
+	    return; 
+	 }
+%>
 <jsp:include page="navbar.jsp" />
 
 <style>
@@ -170,34 +178,28 @@
         <div class="container">
             <h2 class="section-title">Our Menu</h2>
             <div class="menu-grid">
-                <div class="food-card" id="food">
-                    <img src="images/pizza.jpg" alt="Margherita Pizza" class="food-img" />
-                    <div class="food-content">
-                        <div class="food-name">Margherita Pizza</div>
-                        <div class="food-price">₹499</div>
-                    </div>
-                </div>
-                <div class="food-card" id="food">
-                    <img src="images/burger.jpg" alt="Cheeseburger" class="food-img" />
-                    <div class="food-content">
-                        <div class="food-name">Cheeseburger</div>
-                        <div class="food-price">₹349</div>
-                    </div>
-                </div>
-                <div class="food-card" id="food">
-                    <img src="images/pasta.jpg" alt="Creamy Alfredo Pasta" class="food-img" />
-                    <div class="food-content">
-                        <div class="food-name">Creamy Alfredo Pasta</div>
-                        <div class="food-price">₹399</div>
-                    </div>
-                </div>
-                <div class="food-card" id="food">
-                    <img src="images/cake.jpg" alt="Chocolate Cake" class="food-img" />
-                    <div class="food-content">
-                        <div class="food-name">Chocolate Cake</div>
-                        <div class="food-price">₹299</div>
-                    </div>
-                </div>
+				
+				<%
+				   List<Product> product = (List<Product>) request.getAttribute("data");
+				   if (product != null && !product.isEmpty()) {
+					for (Product prod : product) {
+				  %>
+				  <a href="/desc/<%= prod.getId() %>" style="text-decoration: none; color: inherit;">
+					<div class="food-card" id="food" data-id="<%= prod.getId() %>">
+						<div class="food-content">
+							<div class="food-name"><%= prod.getName() %></div>
+				            <div class="food-price">₹<%= prod.getPrice() %></div>
+				     	</div>
+				   </div>
+				</a>
+				<%
+				        }
+				    }
+				%>
+				
+				
+				
+				
             </div>
         </div>
     </section>

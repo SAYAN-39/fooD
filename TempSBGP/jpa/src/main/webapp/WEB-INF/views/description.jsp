@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.example.jpa.model.Product" %>
    <jsp:include page="navbar.jsp" />
 <!DOCTYPE html>
 
@@ -120,17 +121,24 @@
     </style>
 </head>
 <body>
+	<%
+	    Product product=(Product)request.getAttribute("data");
+	    if(product!=null)
+	    {
+	%>
     <div class="container">
         <div class="order-card">
-            <div class="pizza-name">Margarita Pizza</div>
-            <div class="price">Price: 499</div>
+            <div class="pizza-name"><%= product.getName() %></div>
+            <div class="price">Price: <%= product.getPrice() %></div>
             <div class="button-group">
                 <button class="btn btn-checkout" onclick="checkout()">Checkout</button>
                 <button class="btn btn-cancel" onclick="cancel()">Cancel</button>
             </div>
         </div>
     </div>
-
+	<% 
+	}
+	%>   
     <script>
         function checkout() {
             alert('Proceeding to checkout for Margarita Pizza (₹499)');

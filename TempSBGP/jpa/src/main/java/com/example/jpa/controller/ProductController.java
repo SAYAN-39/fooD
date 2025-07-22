@@ -58,18 +58,27 @@ public class ProductController {
 	}
 	
 	@PostMapping("/update")
-	public String updateRecord(@RequestParam("prodname")String name,
-			@RequestParam("catagory")String catagory,@RequestParam("qty")String quantity,
-			@RequestParam("price")String price)
-	
-	
-	{
-		//System.out.println("Hello........."+name);
+	public String updateRecord(@RequestParam("prodname")String name, @RequestParam("price")String price){
 		Product prod=new Product();
 		prod.setName(name);
 		prod.setPrice(Double.parseDouble(price));
 		pd.save(prod);
 		return "redirect:/viewitem";
+	}
+	@GetMapping("/")
+	public String index(Model model)
+	{
+		List<Product> prod=pd.findAll();
+		model.addAttribute("data",prod);
+		return "index";
+	}
+	
+	@RequestMapping("/desc/{id}")
+	public String description(@PathVariable Integer id,Model model)
+	{
+		Product prod=pd.findById(id).get();
+		model.addAttribute("data",prod);
+		return "description";
 	}
 
 }

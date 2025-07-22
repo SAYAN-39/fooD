@@ -1,4 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+	String data = (String) session.getAttribute("udata");
+	String userrolecheck = (String) session.getAttribute("role");
+
+	if (data == null) {
+		response.sendRedirect("/reg");  
+	    return; 
+	} else if (!"admin".equals(userrolecheck)) { // ✅ safer way
+		response.sendRedirect("logout");  
+		return; 
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,22 +25,46 @@
 
 <div class="container">
     <!-- FIX: Corrected to match CSS (sidebar, not navigation) -->
-    <div class="sidebar">
-        <ul>
-            <li>
-                <a href="#">
-                    <span class="icon"><i class="fa fa-user-plus"></i></span>
-                    <span class="title"><h2>Dashboard</h2></span>
-                </a> 
-            </li>
-            <li><a href="dash"><span class="icon"><i class="fa fa-home"></i></span><span class="title">Home</span></a></li>
-            <li><a href="addform"><span class="icon"><i class="fa fa-id-card"></i></span><span class="title">Add Fooditem</span></a></li>
-            <li><a href="#"><span class="icon"><i class="fa fa-user"></i></span><span class="title">View User</span></a></li>
-            <li><a href="#"><span class="icon"><i class="fa fa-cogs"></i></span><span class="title">View Order</span></a></li>
-            <li><a href="#"><span class="icon"><i class="fa fa-cogs"></i></span><span class="title">View Feedback</span></a></li>
-            <li><a href="login.jsp"><span class="icon"><i class="fa fa-sign-out"></i></span><span class="title">Log out</span></a></li>
-        </ul>
-    </div>
+	<div class="sidebar">
+	    <ul>
+	        <li>
+	            <a href="#">
+	                <span class="icon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+	                <span class="title"><h2>Admin Dashboard</h2></span>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="dash">
+	                <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
+	                <span class="title">Home</span>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="addform">
+	                <span class="icon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+	                <span class="title">Add Fooditem</span>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="userDash">
+	                <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+	                <span class="title">View User</span>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="app">
+	                <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+	                <span class="title">View Order</span>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="logout">
+	                <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+	                <span class="title">Log out</span>
+	            </a>
+	        </li>
+	    </ul>
+	</div>
 
     <div class="main-content">
         <div class="topbar">

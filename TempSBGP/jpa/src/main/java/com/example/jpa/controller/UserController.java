@@ -1,13 +1,18 @@
 package com.example.jpa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.jpa.dao.UserDao;
+import com.example.jpa.model.Product;
 import com.example.jpa.model.User;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,12 +45,14 @@ public String loginprocess(@RequestParam("email")String email,@RequestParam("pas
 	if(user!=null)
 	{
 		String role=user.getRole();
+		session.setAttribute("udata", email);
+		session.setAttribute("role", role);
 		if(role.equals("customer"))
 		{
-			session.setAttribute("udata", email);
-			return "index";
+			return "redirect:/";
 		}else {
-			return "redirect:/viewitem";
+			
+			return "redirect:/dash";
 		}
 		
 		
@@ -59,5 +66,12 @@ public String destroy(HttpServletRequest request)
 {
 	request.getSession().invalidate();
 	return "index";
+}
+@GetMapping("/userDash")
+public String index(Model model)
+{
+	List<User>prod=ud.findAll();
+	model.addAttribute("data",prod);
+	return "userDash";
 }
 }
