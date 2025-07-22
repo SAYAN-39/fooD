@@ -17,77 +17,59 @@ import com.example.jpa.model.Product;
 
 @Controller
 public class ProductController {
-@Autowired
-ProductDao pd;
-@PostMapping("/additem")
-public String addProd(@RequestParam("prodid")String id, @RequestParam("prodname")String name,
-		@RequestParam("category")String catagory,@RequestParam("qty")String quantity,
-		@RequestParam("price")String price,ModelMap model)
-{
-	Product prod=new Product();
-	prod.setId(id);
-	prod.setName(name);
-	prod.setCatagory(catagory);
-	prod.setQuantity(Integer.parseInt(quantity));
-	prod.setPrice(Double.parseDouble(price));
-	pd.save(prod);
-	model.put("msg", "Added!");
-	return "addForm";
-}
-@GetMapping("/viewitem")
-public String getAllData(Model model)
-{
-	List<Product> prod=pd.findAll();
+	@Autowired
+	ProductDao pd;
+	@PostMapping("/additem")
+	public String addProd(
+	        @RequestParam("prodname") String name,
+	        @RequestParam("price") String price,
+	        ModelMap model) {
 	
-	model.addAttribute("data",prod);
-	return "dashboard";
-}
+	    Product prod = new Product();
+	    prod.setName(name);
+	    prod.setPrice(Double.parseDouble(price));
+	
+	    pd.save(prod);
+	    model.put("msg", "Added!");
+	    System.out.println(pd.findAll());
+	    return "addForm";
+	}
+	@GetMapping("/dash")
+	public String getAllData(Model model)
+	{
+		List<Product> prod=pd.findAll();
+		System.out.println(pd.findAll());
+		model.addAttribute("data",prod);
+		return "dashboard";
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deleteProd(@PathVariable Integer id)
+	{
+		pd.deleteById(id);
+		return "redirect:/viewitem";
+	}
+	@RequestMapping("/viewrecord/{id}")
+	public String getSingleData(@PathVariable Integer id,Model model)
+	{
+		Product prod=pd.findById(id).get();
+		model.addAttribute("data",prod);
+		return "updateForm";
+	}
+	
+	@PostMapping("/update")
+	public String updateRecord(@RequestParam("prodname")String name,
+			@RequestParam("catagory")String catagory,@RequestParam("qty")String quantity,
+			@RequestParam("price")String price)
+	
+	
+	{
+		//System.out.println("Hello........."+name);
+		Product prod=new Product();
+		prod.setName(name);
+		prod.setPrice(Double.parseDouble(price));
+		pd.save(prod);
+		return "redirect:/viewitem";
+	}
 
-@RequestMapping("/delete/{id}")
-public String deleteProd(@PathVariable String id)
-{
-	pd.deleteById(id);
-	return "redirect:/viewitem";
-}
-@RequestMapping("/viewrecord/{id}")
-public String getSingleData(@PathVariable String id,Model model)
-{
-	Product prod=pd.findById(id).get();
-	model.addAttribute("data",prod);
-	return "updateForm";
-}
-
-@PostMapping("/update")
-public String updateRecord(@RequestParam("prodid")String id, @RequestParam("prodname")String name,
-		@RequestParam("catagory")String catagory,@RequestParam("qty")String quantity,
-		@RequestParam("price")String price)
-
-
-{
-	//System.out.println("Hello........."+name);
-	Product prod=new Product();
-	prod.setId(id);
-	prod.setName(name);
-	prod.setCatagory(catagory);
-	prod.setQuantity(Integer.parseInt(quantity));
-	prod.setPrice(Double.parseDouble(price));
-	pd.save(prod);
-	return "redirect:/viewitem";
-}
-
-@GetMapping("/mens")
-public String getAllMensItem(Model model)
-{
-	List<Product> prod=(List<Product>) pd.findByCatagory("mcollection");
-	model.addAttribute("product",prod);
-	return "mens";
-}
-
-@GetMapping("/womens")
-public String getAllWomensItem(Model model)
-{
-	List<Product> prod=(List<Product>) pd.findByCatagory("wcollection");
-	model.addAttribute("product",prod);
-	return "womens";
-}
 }
