@@ -131,24 +131,24 @@
             <div class="pizza-name"><%= product.getName() %></div>
             <div class="price">Price: <%= product.getPrice() %></div>
             <div class="button-group">
-                <button class="btn btn-checkout" onclick="checkout()">Checkout</button>
-                <button class="btn btn-cancel" onclick="cancel()">Cancel</button>
+                <div class="button-group">
+    <form method="post" action="/bill">
+    
+        <input type="hidden" name="productId" value="<%= product.getId() %>">
+        <input type="hidden" name="productName" value="<%= product.getName() %>">
+        <input type="hidden" name="productPrice" value="<%= product.getPrice() %>">
+        <button type="submit" class="btn btn-checkout">Checkout</button>
+    </form>
+    <button class="btn btn-cancel" onclick="cancel()">Cancel</button>
+</div>
+
+                
             </div>
         </div>
     </div>
 	<% 
 	}
 	%>   
-    <script>
-        function checkout() {
-            alert('Proceeding to checkout for Margarita Pizza (₹499)');
-            // Add your checkout logic here
-        }
-
-        function cancel() {
-            alert('Order cancelled');
-            // Add your cancel logic here
-        }
-    </script>
+    
 </body>
 </html>
