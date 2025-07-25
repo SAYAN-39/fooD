@@ -280,7 +280,7 @@ footer {
     <!-- Footer -->
     <footer id="contact">
         <div class="container">
-            <p>&copy; 2023 Foodexpress. All rights reserved.</p>
+            <p>&copy; 2025 Foodexpress. All rights reserved.</p>
         </div>
     </footer>
 </body>
