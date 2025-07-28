@@ -232,21 +232,8 @@
         </div>
         
         <div class="details-container">
-            <h1 class="food-title"><%= product.getName() %></h1>
-            
-            <div class="rating">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <span class="rating-text">4.7 (128 reviews)</span>
-            </div>
-            
-            <div class="price-tag">₹ <%= product.getPrice() %></div>
-            
+            <h1 class="food-title"><%= product.getName() %></h1>            
+            <div class="price-tag">₹ <%= product.getPrice() %></div>            
             <p class="description">
                 Indulge in this delicious creation made with premium ingredients. 
                 Perfectly crafted to deliver an exceptional culinary experience 

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<% 
+	String email = (String) session.getAttribute("udata"); 
+	String name = (String) session.getAttribute("name"); 
+	String ph_number = (String) session.getAttribute("contact"); 
+%>
 <jsp:include page="navbar.jsp" />
 <!DOCTYPE html>
 <html>
@@ -124,21 +129,7 @@
             text-align: center;
         }
 
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(34, 197, 94, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: #22c55e;
-            font-size: 2.5rem;
-            border: 2px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .btn-home {
+        .btn-checkout {
             display: inline-block;
             padding: 16px 40px;
             background: linear-gradient(90deg, #22c55e, #16a34a);
@@ -151,11 +142,32 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3);
+            margin-right: 20px;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 20px -3px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(90deg, #64748b, #475569);
+            color: #f1f5f9;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(100, 116, 139, 0.3);
         }
 
         .btn-home:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 20px -3px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 15px 20px -3px rgba(100, 116, 139, 0.4);
         }
 
         .food-image-container {
@@ -230,13 +242,22 @@
             .main-container {
                 margin: 10px;
             }
+
+            .action-section {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-checkout, .btn-home {
+                margin: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="food-image-container">
-            <%-- You can populate the src with actual food image --%>
             <img src="" alt="${productName}" class="food-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="placeholder-icon" style="display: none;">
                 <i class="fas fa-utensils"></i>
@@ -245,8 +266,8 @@
         
         <div class="bill-card">
             <div class="bill-header">
-                <h1 class="bill-title">Order Confirmed</h1>
-                <p class="bill-subtitle">Thank you for your purchase!</p>
+                <h1 class="bill-title">Order Summary</h1>
+                <p class="bill-subtitle">Review your order details</p>
             </div>
             
             <div class="bill-details">
@@ -302,25 +323,32 @@
             </div>
             
             <div class="order-summary">
-                <h3 class="summary-title">Order Summary</h3>
+                <h3 class="summary-title">Customer Details</h3>
                 <div class="summary-item">
-                    <span class="summary-label">Order ID:</span>
-                    <span class="summary-value">#ORD-${productName.hashCode() % 10000}</span>
+                    <span class="summary-label">Name:</span>
+                    <span class="summary-value"><%= name %></span>
                 </div>
                 <div class="summary-item">
-                    <span class="summary-label">Date:</span>
-                    <span class="summary-value"><%= new java.text.SimpleDateFormat("MMM dd, yyyy").format(new java.util.Date()) %></span>
+                    <span class="summary-label">Email:</span>
+                    <span class="summary-value"><%= email %></span>
                 </div>
                 <div class="summary-item">
-                    <span class="summary-label">Status:</span>
-                    <span class="summary-value" style="color: #22c55e;">Confirmed</span>
+                    <span class="summary-label">Contact:</span>
+                    <span class="summary-value"><%= ph_number %></span>
                 </div>
             </div>
             
             <div class="action-section">
-                <div class="success-icon">
-                    <i class="fas fa-check"></i>
-                </div>
+                <form method="post" action="/createOrder" style="display: inline-block;">
+                    <input type="hidden" name="amount" value="${total}">
+                    <input type="hidden" name="name" value="<%= name %>">
+                    <input type="hidden" name="email" value="<%= email %>">
+                    <input type="hidden" name="contact" value="<%= ph_number %>">
+                    <button type="submit" class="btn-checkout">
+                        <i class="fas fa-credit-card"></i> Proceed to Payment
+                    </button>
+                </form>
+                
                 <a href="/" class="btn-home">
                     <i class="fas fa-home"></i> Back to Home
                 </a>

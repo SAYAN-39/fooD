@@ -45,7 +45,11 @@ public String loginprocess(@RequestParam("email")String email,@RequestParam("pas
 	if(user!=null)
 	{
 		String role=user.getRole();
+		String name=user.getName();
+		String ph_number=user.getPhno();
 		session.setAttribute("udata", email);
+		session.setAttribute("name", name);
+		session.setAttribute("contact", ph_number);
 		session.setAttribute("role", role);
 		if(role.equals("customer"))
 		{

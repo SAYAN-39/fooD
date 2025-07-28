@@ -37,13 +37,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="userDash">
                         <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
                         <span class="title">View User</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="orderDash">
                         <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
                         <span class="title">View Order</span>
                     </a>

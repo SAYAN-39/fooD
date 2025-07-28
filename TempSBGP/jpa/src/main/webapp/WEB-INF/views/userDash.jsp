@@ -92,15 +92,9 @@
                 </a>
             </li>
             <li>
-                <a href="app">
+                <a href="orderDash">
                     <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
                     <span class="title">View Order</span>
-                </a>
-            </li>
-            <li>
-                <a href="app">
-                    <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                    <span class="title">View Feedback</span>
                 </a>
             </li>
             <li>

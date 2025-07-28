@@ -52,7 +52,7 @@
 	            </a>
 	        </li>
 	        <li>
-	            <a href="app">
+	            <a href="orderdash">
 	                <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
 	                <span class="title">View Order</span>
 	            </a>
