@@ -107,15 +107,17 @@
 
                 <!-- ✅ FIXED FORM TAG: Corrected enctype attribute -->
 				<form action="additem" method="post" enctype="multipart/form-data">
-
 				    <label for="prodname">Food Name</label>
-				    <input type="text" name="prodname" id="prodname" placeholder="Food name.."><br><br>
+				    <input type="text" name="prodname" id="prodname"><br><br>
 
 				    <label for="price">Price</label>
-				    <input type="text" name="price" id="price" placeholder="Price.."><br><br>
+				    <input type="text" name="price" id="price"><br><br>
 
 				    <label for="description">Description</label>
-				    <textarea name="description" id="description" placeholder="Food description.." rows="4"></textarea><br><br>
+				    <textarea name="description" id="description" rows="4"></textarea><br><br>
+
+				    <label for="image">Image</label>
+				    <input type="file" name="image"><br><br>
 
 				    <input type="submit" value="Submit">
 				    <input type="reset" value="Clear">

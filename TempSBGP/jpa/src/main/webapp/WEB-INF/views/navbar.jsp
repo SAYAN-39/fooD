@@ -197,7 +197,7 @@
                     <span class="user-info">Hello, <%= str %></span>
                 </li>
                 <li class="nav-item">  
-                    <a class="nav-link action-btn" href="logout">Logout</a>  
+                    <a class="nav-link action-btn" href="/logout">Logout</a>  
                 </li>
             <%
             } else {

@@ -262,7 +262,7 @@ footer {
                   %>
                   <a href="/desc/<%= prod.getId() %>" style="text-decoration: none; color: inherit;">
                     <div class="food-card" id="food" data-id="<%= prod.getId() %>">
-                        <img src="" alt="<%= prod.getName() %>" class="food-image">
+                        <img src="uploads/<%= prod.getImage() %>" alt="<%= prod.getName() %>" class="food-image">
                         <div class="food-content">
                             <div class="food-name"><%= prod.getName() %></div>
                             <div class="food-price">₹<%= prod.getPrice() %></div>

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.example.jpa.model.Product" %>
+<%
+    String data = (String) session.getAttribute("udata");
+    if (data == null) {
+        response.sendRedirect("/reg");  
+        return; 
+     }
+%>
    <jsp:include page="navbar.jsp" />
 <!DOCTYPE html>
 
@@ -225,7 +232,7 @@
     <div class="main-container">
         <div class="food-image-container">
             <%-- You can replace the placeholder with actual image src --%>
-            <img src="" alt="<%= product.getName() %>" class="food-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img src="../uploads/<%= product.getImage() %>" alt="<%= product.getName() %>" class="food-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="placeholder-icon" style="display: none;">
                 <i class="fas fa-utensils"></i>
             </div>
