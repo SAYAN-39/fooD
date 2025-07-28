@@ -52,7 +52,7 @@
 	            </a>
 	        </li>
 	        <li>
-	            <a href="orderdash">
+	            <a href="orderDash">
 	                <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
 	                <span class="title">View Order</span>
 	            </a>
@@ -106,17 +106,20 @@
                 </div>
 
                 <!-- ✅ FIXED FORM TAG: Corrected enctype attribute -->
-                <form action="additem" method="post" enctype="multipart/form-data">
+				<form action="additem" method="post" enctype="multipart/form-data">
 
-                    <label for="prodname">Food Name</label>
-                    <input type="text" name="prodname" id="prodname" placeholder="Food name.."><br><br>
+				    <label for="prodname">Food Name</label>
+				    <input type="text" name="prodname" id="prodname" placeholder="Food name.."><br><br>
 
-                    <label for="price">Price</label>
-                    <input type="text" name="price" id="price" placeholder="Price.."><br><br>
+				    <label for="price">Price</label>
+				    <input type="text" name="price" id="price" placeholder="Price.."><br><br>
 
-                    <input type="submit" value="Submit">
-                    <input type="reset" value="Clear">
-                </form>
+				    <label for="description">Description</label>
+				    <textarea name="description" id="description" placeholder="Food description.." rows="4"></textarea><br><br>
+
+				    <input type="submit" value="Submit">
+				    <input type="reset" value="Clear">
+				</form>
             </div>
         </div>
     </div>

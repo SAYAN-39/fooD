@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String str = (String) session.getAttribute("udata"); %>
+<% String str = (String) session.getAttribute("name"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,37 +186,15 @@
         <ul class="navbar-nav mr-auto">  
             <li class="nav-item">  
                 <a class="nav-link" href="/">Home</a>  
-            </li> 
-            
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                    Categories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/mens">Gents</a>
-                    <a class="dropdown-item" href="/womens">Ladies</a>
-                    <a class="dropdown-item" href="catview?type=kids">HandBags</a>
-                </div>
-            </li>
+            </li>             
         </ul>
         
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">  
-                <form class="search-form my-2 my-lg-0">
-                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-                    <button class="search-btn" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                        </svg>
-                    </button>
-                </form>
-            </li>
-            
+        <ul class="navbar-nav ml-auto">            
             <%
             if (str != null) {
             %>
                 <li class="nav-item">  
-                    <span class="user-info">Hello: <%= str %></span>
+                    <span class="user-info">Hello, <%= str %></span>
                 </li>
                 <li class="nav-item">  
                     <a class="nav-link action-btn" href="logout">Logout</a>  
